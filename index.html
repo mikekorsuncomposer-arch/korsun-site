@@ -604,7 +604,7 @@ let start='en';
 if(location.hash==='#ru')start='ru';else if(location.hash!=='#en'){try{if(localStorage.getItem('lang')==='ru')start='ru'}catch(e){}}
 setLang(start);
 
-(function(){const u=['mikekorsun','composer'].join('.'),d=['gmail','com'].join('.');const m=document.getElementById('mail');
+(function(){const u='hello',d=['korsunmusic','com'].join('.');const m=document.getElementById('mail');
 const go=()=>{m.href='mail'+'to:'+u+'@'+d+'?subject='+encodeURIComponent('Project enquiry')};m.addEventListener('mouseenter',go);m.addEventListener('focus',go);m.addEventListener('touchstart',go,{passive:true});m.addEventListener('click',go)})();
 
 const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>',PAUSE='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>';
