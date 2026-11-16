@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="img/logo.png">
+<meta property="og:title" content="Mike Korsun — Composer">
+<meta property="og:description" content="Emotional music for film, games and trailers. Orchestration. Music for mandolin.">
+<meta property="og:image" content="img/portrait-sea.jpg">
+<title>Mike Korsun — Composer</title>
+<meta name="description" content="Mike Korsun — composer, orchestrator and mandolinist. Emotional music for film, games, trailers and media, orchestration, and music for mandolin ensembles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Great+Vibes&display=swap">
+<style>
+/* Layout: one long dark score — hero with portrait, sections separated by thin staff lines.
+   Colour: forest-and-sea base (emerald + sea blue) with small blue, violet and amber accents; mandolin is the signature. */
+:root{
+  --bg:#040908; --panel:#0a1513; --line:rgba(190,235,215,.10); --line-2:rgba(190,235,215,.18);
+  --fg:#eef3ef; --mu:#9fb0a8; --mu-2:#6f817a; --text:#d6dfda;
+  --acc:#34d399;      /* emerald */
+  --sea:#2dbec8;      /* sea wave */
+  --blue:#6b9bff;     /* deep sea blue */
+  --violet:#a98bfa;   /* dusk violet */
+  --amber:#f5a25b;    /* warm accent, used sparingly */
+  --acc-ink:#03140d;
+  --f-display:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-accent:"Great Vibes","Snell Roundhand","Segoe Script",cursive;
+  --wrap:1180px; --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-display);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:rgba(4,9,8,.86)}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+@media (max-width:480px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(4,9,8,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.logo{display:inline-flex;align-items:center;text-decoration:none}
+.logo img{display:block;height:34px;width:auto}
+footer .logo img{height:40px}
+.nav{display:flex;gap:26px;margin-left:auto;font-size:14.5px;font-weight:500}
+.nav a{text-decoration:none;color:var(--mu);transition:color .2s}
+.nav a:hover{color:var(--fg)}
+.lang{display:flex;border:1px solid var(--line-2);border-radius:999px;padding:3px;gap:2px}
+.lang button{all:unset;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:999px;color:var(--mu)}
+.lang button[aria-pressed="true"]{background:var(--acc);color:var(--acc-ink)}
+.lang button:focus-visible{outline:2px solid var(--acc)}
+@media (max-width:860px){.nav{display:none}.lang{margin-left:auto}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:72px 64px}
+.glow{position:absolute;inset:0;pointer-events:none;
+  background:
+   radial-gradient(520px 420px at 80% 18%,rgba(10,95,64,.55),transparent 70%),
+   radial-gradient(460px 380px at 95% 80%,rgba(40,70,170,.42),transparent 70%),
+   radial-gradient(380px 300px at 60% 95%,rgba(110,70,190,.22),transparent 70%),
+   radial-gradient(340px 260px at 40% 0%,rgba(8,80,90,.30),transparent 70%)}
+.score{position:absolute;right:-140px;top:-90px;width:900px;max-width:none;opacity:.2;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 42% 40% at 56% 42%,#000 35%,transparent 100%);mask-image:radial-gradient(ellipse 42% 40% at 56% 42%,#000 35%,transparent 100%)}
+@media (max-width:900px){.score{opacity:.1;right:-260px}}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.eyebrow.sea{color:var(--sea)}.eyebrow.blue{color:var(--blue)}.eyebrow.violet{color:var(--violet)}.eyebrow.amber{color:var(--amber)}
+h1{font-weight:800;font-size:clamp(46px,7.4vw,104px);line-height:.98;letter-spacing:-.035em;margin:20px 0 26px;text-wrap:balance}
+h1 em,h2 em{font-family:var(--f-accent);font-style:normal;font-weight:400;font-size:1.28em;line-height:.8;display:inline-block;padding:.12em .14em .18em .12em;margin:-.12em -.04em -.18em -.02em;letter-spacing:0;
+  background:linear-gradient(100deg,var(--acc) 15%,var(--sea) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.lede{font-size:clamp(17px,1.6vw,20px);color:var(--mu);max-width:36em;margin:0 0 34px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .2s,background .2s,border-color .2s;border:1px solid transparent}
+.btn.fill{background:var(--acc);color:var(--acc-ink)}
+.btn.fill:hover{background:#4ee0a8;transform:translateY(-1px)}
+.btn.line{border-color:var(--line-2);color:var(--fg)}
+.btn.line:hover{border-color:var(--sea)}
+.btn svg{width:16px;height:16px}
+.portrait{position:relative;aspect-ratio:4/5;max-width:100%;margin:0;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 90%,transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 90%,transparent);
+  mask-composite:intersect}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:72% 35%;filter:saturate(.95) contrast(1.03)}
+.portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(4,9,8,.35))}
+.hero .facts-wrap{display:block}
+.facts{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:64px}
+.fact{--c:var(--acc);padding-top:20px;border-top:1px solid var(--line-2);position:relative}
+.fact::before{content:"";position:absolute;left:0;top:-1px;width:36px;height:2px;background:var(--c)}
+.fact:nth-child(2){--c:var(--sea)}.fact:nth-child(3){--c:var(--blue)}.fact:nth-child(4){--c:var(--violet)}
+.fact b{display:block;font-size:clamp(30px,3.4vw,44px);font-weight:500;letter-spacing:-.02em;line-height:1.1;color:var(--fg);font-variant-numeric:tabular-nums lining-nums;margin-bottom:6px}
+.fact span{display:block;color:var(--mu);font-size:14.5px;max-width:22em}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.portrait{max-width:440px}.facts{grid-template-columns:repeat(2,1fr);row-gap:28px;gap:20px}}
+
+/* sections */
+section{padding-block:96px;position:relative}
+.staff{height:17px;background:repeating-linear-gradient(180deg,var(--line) 0 1px,transparent 1px 4px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+h2{font-weight:800;font-size:clamp(34px,4.6vw,58px);line-height:1.04;letter-spacing:-.03em;margin:10px 0 0;text-wrap:balance}
+.sec-head p{max-width:30em;color:var(--mu);margin:0}
+h3{font-size:21px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;line-height:1.25}
+
+/* work */
+.work{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.w{position:relative;border-radius:var(--r);overflow:hidden;background:var(--panel);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none;transition:border-color .25s,transform .25s}
+a.w:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.w .tag{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sea)}
+.w p{margin:0;color:var(--mu);font-size:15.5px}
+.w .go{margin-top:auto;padding-top:12px;font-size:14px;font-weight:600;color:var(--acc)}
+.w.big{grid-column:span 3;min-height:380px;justify-content:flex-end}
+.w.big>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;transition:opacity .3s}
+.w.big:hover>img{opacity:.75}
+.w.big::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,9,8,.25) 0%,rgba(4,9,8,.45) 45%,rgba(4,9,8,.94) 88%);z-index:1}
+.w.big .go{margin-top:0}
+.w.big>*:not(img){position:relative;z-index:2}
+.w.sm{grid-column:span 2}
+.w.t-blue .tag{color:var(--blue)}.w.t-violet .tag{color:var(--violet)}.w.t-amber .tag{color:var(--amber)}
+.rel{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid var(--line-2);text-decoration:none;transition:border-color .2s,color .2s;background:rgba(4,9,8,.4)}
+.chip:hover{border-color:var(--acc);color:var(--acc)}
+.chip.solid{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.chip.solid:hover{color:var(--acc-ink);background:#4ee0a8}
+.singles{display:flex;flex-direction:column;gap:0;margin-top:6px;border-top:1px solid var(--line)}
+.singles a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
+.singles a span{color:var(--mu);font-weight:500;font-size:14px}
+.singles a:hover{color:var(--acc)}
+@media (max-width:900px){.work{grid-template-columns:1fr 1fr}.w.big,.w.sm{grid-column:span 2}.w.big{min-height:320px}}
+@media (min-width:560px) and (max-width:900px){.w.sm{grid-column:span 1}.w.sm:last-child{grid-column:span 2}}
+
+/* listen */
+.listen{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+.tracks{border-top:1px solid var(--line)}
+.trk{display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line)}
+.play{all:unset;cursor:pointer;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--fg);transition:background .2s,border-color .2s}
+.play:hover{border-color:var(--c,var(--acc))}
+.play:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.trk.on .play{background:var(--c,var(--acc));color:var(--acc-ink);border-color:var(--c,var(--acc))}
+.play svg{width:16px;height:16px}
+.trk .t{min-width:0}
+.trk .t b{display:block;font-weight:700;font-size:16.5px}
+.trk .t span{color:var(--mu);font-size:14px}
+.bar{height:3px;background:var(--line-2);border-radius:3px;margin-top:10px;cursor:pointer;position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--c,var(--acc));border-radius:3px}
+.trk time{font-size:13.5px;color:var(--mu);font-variant-numeric:tabular-nums}
+.album{border-radius:18px;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.album img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.album .in{padding:22px 24px 24px}
+.album p{color:var(--mu);font-size:15px;margin:0 0 16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.more{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+@media (max-width:900px){.listen{grid-template-columns:1fr}.album{max-width:460px}}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{--c:var(--acc);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;display:flex;flex-direction:column;gap:12px;min-width:0;border-top:2px solid color-mix(in srgb,var(--c) 70%,transparent)}
+.card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);border:1px solid color-mix(in srgb,var(--c) 28%,transparent)}
+.card .ic svg{width:24px;height:24px}
+.card p{margin:0;color:var(--mu);font-size:15px}
+.card ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
+.card li{padding-left:18px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--c);opacity:.8}
+.card.c-blue{--c:var(--blue)}.card.c-violet{--c:var(--violet)}.card.c-sea{--c:var(--sea)}
+.card.sig{background:linear-gradient(160deg,rgba(18,84,60,.55),rgba(8,40,44,.55) 60%,var(--panel));border-color:rgba(52,211,153,.35)}
+.card .badge{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1c0d02;background:var(--amber);padding:4px 10px;border-radius:999px}
+@media (max-width:1000px){.svc{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--line)}
+.step{padding:20px 20px 0 0}
+.step small{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.step:nth-child(1) small{color:var(--acc)}.step:nth-child(2) small{color:var(--sea)}.step:nth-child(3) small{color:var(--blue)}.step:nth-child(4) small{color:var(--violet)}
+.step b{display:block;font-size:17px;margin:6px 0 4px}
+.step span{color:var(--mu);font-size:14.5px}
+@media (max-width:760px){.steps{grid-template-columns:1fr 1fr;row-gap:20px}}
+
+/* about */
+.about{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.about .ph{position:sticky;top:96px;margin:0;border-radius:20px;overflow:hidden;border:1px solid var(--line-2);box-shadow:30px 30px 90px -40px rgba(169,139,250,.35)}
+.about .ph img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover}
+.bio p{font-size:18px;line-height:1.7;margin:0 0 20px;max-width:38em;color:var(--text)}
+.bio p:first-child{font-size:21px;color:var(--fg)}
+@media (max-width:900px){.about{grid-template-columns:1fr}.about .ph{position:relative;top:0;max-width:380px}}
+.tl{margin:56px 0 0;border-left:1px solid var(--line-2);padding-left:0;list-style:none}
+.tl li{--c:var(--acc);display:grid;grid-template-columns:120px 1fr;gap:20px;padding:14px 0 14px 26px;position:relative}
+.tl li::before{content:"";position:absolute;left:-5px;top:22px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--c)}
+.tl li.stage{--c:var(--sea)}.tl li.media{--c:var(--blue)}.tl li.artist{--c:var(--violet)}
+.tl time{font-weight:700;color:var(--c);font-variant-numeric:tabular-nums;font-size:15px;padding-top:2px}
+.tl b{display:block;font-weight:600}
+.tl span{color:var(--mu);font-size:15px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-size:13px;color:var(--mu)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;border:2px solid}
+@media (max-width:560px){.tl li{grid-template-columns:1fr;gap:2px}}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:150px;gap:12px;margin-top:64px}
+.gallery figure{margin:0;position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.gallery img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:filter .3s,transform .5s}
+.gallery figure:hover img{filter:saturate(1);transform:scale(1.03)}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 9px;font-size:12.5px;color:#dfe8e3;background:linear-gradient(180deg,transparent,rgba(4,9,8,.85))}
+.g1{grid-column:span 5;grid-row:span 2}.g2{grid-column:span 4;grid-row:span 2}.g3{grid-column:span 3;grid-row:span 2}
+.g4{grid-column:span 4;grid-row:span 2}.g5{grid-column:span 3;grid-row:span 2}.g6{grid-column:span 5;grid-row:span 2}
+@media (max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px}.gallery figure{grid-column:span 1!important;grid-row:span 1!important}}
+
+/* contact */
+.contact{border-radius:24px;border:1px solid rgba(107,155,255,.25);background:radial-gradient(600px 300px at 85% 0%,rgba(10,90,62,.45),transparent 70%),radial-gradient(500px 300px at 0% 100%,rgba(40,70,170,.35),transparent 70%),radial-gradient(300px 200px at 50% 110%,rgba(110,70,190,.25),transparent 70%),var(--panel);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+.contact .intro{color:var(--text);font-size:17px;margin:22px 0 0;max-width:30em}
+.brief{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.brief li{display:flex;gap:12px;color:var(--text);font-size:15.5px}
+.brief li::before{content:"♪";color:var(--amber);font-family:var(--f-accent)}
+.contact .note{color:var(--mu);font-size:14.5px;margin-top:14px}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+/* footer: centred */
+footer{padding-block:56px 44px;border-top:1px solid var(--line);margin-top:96px}
+footer .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+footer .tagline{color:var(--mu);font-size:14.5px;margin:0}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 24px;font-size:14.5px}
+.links a{color:var(--mu);text-decoration:none}
+.links a:hover{color:var(--acc)}
+footer small{color:var(--mu-2);font-size:13px}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  section{padding-block:64px}
+  .hero{padding-block:40px 48px}
+  h1{font-size:clamp(44px,13vw,60px)}
+  .lede{font-size:17px}
+  .cta .btn{flex:1 1 auto;justify-content:center}
+  .portrait{max-width:100%}
+  .facts{margin-top:40px}
+  .sec-head{margin-bottom:28px}
+  .bio p{font-size:16.5px}.bio p:first-child{font-size:18.5px}
+  .w{padding:22px}.w.big{min-height:300px}
+  .trk{grid-template-columns:44px 1fr auto;gap:12px}.play{width:44px;height:44px}
+  .contact{gap:32px}
+  .gallery{gap:8px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="img/logo.png" alt="KORSUN"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work" data-i="nav_work">Work</a>
+      <a href="#listen" data-i="nav_listen">Listen</a>
+      <a href="#services" data-i="nav_services">Services</a>
+      <a href="#about" data-i="nav_about">About</a>
+      <a href="#contact" data-i="nav_contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="l-en" aria-pressed="true">EN</button>
+      <button id="l-ru" aria-pressed="false">RU</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="glow"></div>
+  <img class="score" src="img/score.png" alt="">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" data-i="eyebrow">Composer · Orchestrator · Mandolinist</div>
+      <h1 data-ih="h1">Music that <em>moves</em></h1>
+      <p class="lede" data-i="lede">Emotional scores for film, games and trailers, orchestration for any ensemble, and new music for mandolin, written by a player who has lived on the concert stage for twenty years.</p>
+      <div class="cta">
+        <a class="btn fill" href="#contact" data-i="cta1">Start a project</a>
+        <a class="btn line" href="https://youtu.be/kiHFrDJZSxY" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><span data-i="cta2">Watch video</span></a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <img src="img/portrait-sea.jpg" alt="Mike Korsun playing the mandolin by the sea">
+    </figure>
+  </div>
+  <div class="wrap facts-wrap">
+    <div class="facts">
+      <div class="fact"><b>300+</b><span data-i="f1">concerts as a soloist and ensemble player</span></div>
+      <div class="fact"><b>25+</b><span data-i="f2">international competitions and festivals, laureate</span></div>
+      <div class="fact"><b>2018</b><span data-i="f3">first commissions for film, games and media</span></div>
+      <div class="fact"><b>2020</b><span data-i="f4">first trailer album with Amadea Music Productions</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="staff"></div></div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-i="work_eb">Selected work</div><h2 data-ih="work_h">Music that <em>tells</em> the story</h2></div>
+      <p data-i="work_p">Trailer and library albums, scores for film and games, and my own releases as an artist.</p>
+    </div>
+    <div class="work">
+      <a class="w big" href="https://ffm.to/silentsoul" target="_blank" rel="noopener">
+        <img src="img/silent-soul.jpg" alt="">
+        <div class="tag" data-i="w1t">Album · 2026</div>
+        <h3>Silent Soul</h3>
+        <p data-i="w1p">Eight pieces recorded entirely on mandolin, layer by layer and mostly in first takes. Out on all platforms.</p>
+        <div class="go" data-i="listen_go">Listen →</div>
+      </a>
+      <div class="w big t-blue">
+        <img src="img/aurora.jpg" alt="">
+        <div class="tag" data-i="w2t">Publisher · trailer music</div>
+        <h3>Amadea Music Productions</h3>
+        <p data-i="w2p">Composer for the trailer and media library since 2020. Albums licensed for film, TV and advertising.</p>
+        <div class="rel">
+          <a class="chip" href="https://amadeamusicproductions.com/music/aurora/" target="_blank" rel="noopener">Aurora · 2024</a>
+          <a class="chip" href="https://amadeamusicproductions.com/" target="_blank" rel="noopener">Quantum · 2020</a>
+        </div>
+      </div>
+      <a class="w big t-amber" href="https://open.spotify.com/album/7EKUVOf1bt9l0panpQooIA" target="_blank" rel="noopener">
+        <img src="img/redsea.jpg" alt="">
+        <div class="tag" data-i="w3t">EP · 2024</div>
+        <h3 data-i="w3h">Melodies of the Red Sea</h3>
+        <p data-i="w3p">Solo pieces built on loops: one instrument, layered phrase by phrase into calm, sunlit music.</p>
+        <div class="go" data-i="listen_go2">Listen on Spotify →</div>
+      </a>
+      <div class="w big t-violet" style="justify-content:flex-start;min-height:0">
+        <div class="tag" data-i="w4t">Singles</div>
+        <h3 data-i="w4h">KORSUN singles</h3>
+        <p data-i="w4p">Stand-alone pieces released under the KORSUN name.</p>
+        <div class="singles">
+          <a href="https://open.spotify.com/album/4cxBT32ZwefMiK7MsHWZgY" target="_blank" rel="noopener">From the Depths <span>Spotify →</span></a>
+          <a href="https://open.spotify.com/album/4qSwuirbqUqFUWcmdDdTJF" target="_blank" rel="noopener">Flight to the Future <span>Spotify →</span></a>
+          <a href="https://open.spotify.com/artist/1Rs3lG1rNcX7fJ7GzVEPyG" target="_blank" rel="noopener" data-i="allrel">All releases <span>Spotify →</span></a>
+        </div>
+      </div>
+      <div class="w sm t-blue">
+        <div class="tag" data-i="w5t">Film</div>
+        <h3 data-i="w5h">Film scoring</h3>
+        <p data-i="w5p">Original scores for private film commissions since 2023: themes, underscore and final mix to picture.</p>
+      </div>
+      <div class="w sm t-violet">
+        <div class="tag" data-i="w6t">Games</div>
+        <h3 data-i="w6h">Game music</h3>
+        <p data-i="w6p">Menu themes and adaptive loops built from stems, written for independent game studios.</p>
+      </div>
+      <div class="w sm">
+        <div class="tag" data-i="w7t">Publishers</div>
+        <h3 data-i="w7h">Trailer and library music</h3>
+        <p data-i="w7p">Published by Amadea Music Productions, and writing for Atom Music Audio since 2023.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="staff"></div></div>
+
+<section id="listen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow sea" data-i="listen_eb">Listen</div><h2 data-ih="listen_h">Press play, <em>feel</em> the room change</h2></div>
+      <p data-i="listen_p">A few short pieces from the portfolio. The full portfolio of orchestrations, game and film music is on Google Drive.</p>
+    </div>
+    <div class="listen">
+      <div>
+        <div class="tracks">
+          <div class="trk" data-src="audio/arctic.mp3" style="--c:var(--sea)">
+            <button class="play" aria-label="Play Arctic"></button>
+            <div class="t"><b>Arctic</b><span data-i="t1">Cinematic · documentary</span><div class="bar"><i></i></div></div>
+            <time>1:26</time>
+          </div>
+          <div class="trk" data-src="audio/flowers.mp3" style="--c:var(--acc)">
+            <button class="play" aria-label="Play Flowers"></button>
+            <div class="t"><b>Flowers</b><span data-i="t3">Film underscore</span><div class="bar"><i></i></div></div>
+            <time>1:15</time>
+          </div>
+          <div class="trk" data-src="audio/depths.mp3" style="--c:var(--blue)">
+            <button class="play" aria-label="Play From the Depths"></button>
+            <div class="t"><b>From the Depths</b><span data-i="t5">Loop · mandolin</span><div class="bar"><i></i></div></div>
+            <time>1:30</time>
+          </div>
+          <div class="trk" data-src="audio/wintertale.mp3" style="--c:var(--amber)">
+            <button class="play" aria-label="Play Wintertale"></button>
+            <div class="t"><b>Wintertale</b><span data-i="t6">Mandolin · from the album Silent Soul</span><div class="bar"><i></i></div></div>
+            <time>1:30</time>
+          </div>
+          <div class="trk" data-src="audio/underskin.mp3" style="--c:var(--violet)">
+            <button class="play" aria-label="Play UNDERSKIN main menu"></button>
+            <div class="t"><b>UNDERSKIN — Main Menu</b><span data-i="t2">Game music</span><div class="bar"><i></i></div></div>
+            <time>1:17</time>
+          </div>
+        </div>
+        <div class="more">
+          <a class="btn fill" href="https://drive.google.com/drive/folders/1nEVlYbkHa0ycYw_0KoSu4qs9Hl3KfnZ4" target="_blank" rel="noopener" data-i="portfolio">Full portfolio</a>
+          <a class="btn line" href="https://www.youtube.com/@mikekorsun" target="_blank" rel="noopener">YouTube</a>
+          <a class="btn line" href="https://open.spotify.com/artist/1Rs3lG1rNcX7fJ7GzVEPyG" target="_blank" rel="noopener">Spotify</a>
+        </div>
+      </div>
+      <aside class="album">
+        <img src="img/silent-soul.jpg" alt="Silent Soul album cover">
+        <div class="in">
+          <div class="eyebrow" style="font-size:12px" data-i="alb_eb">New album</div>
+          <h3 style="margin-top:8px">KORSUN — Silent Soul</h3>
+          <p data-i="alb_p">What my soul keeps silent about. A diary in eight pieces for mandolin.</p>
+          <div class="chips">
+            <a class="chip solid" href="https://open.spotify.com/album/68rjgLcJlZHD6O52FMXgIq" target="_blank" rel="noopener">Spotify</a>
+            <a class="chip" href="https://music.apple.com/album/6827305152" target="_blank" rel="noopener">Apple Music</a>
+            <a class="chip" href="https://tidal.com/album/573180032" target="_blank" rel="noopener">Tidal</a>
+            <a class="chip" href="https://ffm.to/silentsoul" target="_blank" rel="noopener" data-i="allp">All platforms</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="staff"></div></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow blue" data-i="svc_eb">Services</div><h2 data-ih="svc_h">What I <em>write</em> for you</h2></div>
+      <p data-i="svc_p">From the first sketch to the final stems. Remote collaboration worldwide, in English, Russian and Ukrainian.</p>
+    </div>
+    <div class="svc">
+      <article class="card c-blue">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg></div>
+        <h3 data-i="s1h">Film, TV &amp; trailers</h3>
+        <p data-i="s1p">A score that follows the picture and the people in it.</p>
+        <ul><li data-i="s1a">Themes and full underscore</li><li data-i="s1b">Spotting to picture, sync to cut</li><li data-i="s1c">Trailer and library tracks with alt versions</li><li data-i="s1d">Stems, cue sheets, mix-ready delivery</li></ul>
+      </article>
+      <article class="card c-violet">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10a4 4 0 0 1 4 4v2.5a2.5 2.5 0 0 1-4.6 1.3L15 14H9l-1.4 1.8A2.5 2.5 0 0 1 3 14.5V12a4 4 0 0 1 4-4z"/><path d="M8 10.5v3M6.5 12h3"/><circle cx="16" cy="11" r=".6" fill="currentColor"/><circle cx="17.5" cy="13" r=".6" fill="currentColor"/></svg></div>
+        <h3 data-i="s2h">Games</h3>
+        <p data-i="s2p">Music that loops without wearing out and lifts the right moment.</p>
+        <ul><li data-i="s2a">Menu, exploration and battle themes</li><li data-i="s2b">Seamless loops and layered stems</li><li data-i="s2c">Stingers and short cues</li></ul>
+      </article>
+      <article class="card c-sea">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h20M2 10h20M2 13h20M2 16h20M2 19h20" opacity=".45"/><ellipse cx="9" cy="16" rx="2.2" ry="1.6" fill="currentColor" stroke="none" transform="rotate(-20 9 16)"/><path d="M11 15.5V5l5 1.5"/></svg></div>
+        <h3 data-i="s3h">Orchestration &amp; mixing</h3>
+        <p data-i="s3p">From a piano sketch or MIDI to a score players can open and play.</p>
+        <ul><li data-i="s3a">Strings, chamber, folk and symphony orchestra</li><li data-i="s3b">Score and parts, engraved</li><li data-i="s3c">Realistic mock-ups for approval</li><li data-i="s3d">Mixing of orchestral music</li></ul>
+      </article>
+      <article class="card sig">
+        <span class="badge" data-i="sig">Signature</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.2 9.6c-3 .6-5.2 3.3-5.2 6.4a5.5 5.5 0 0 0 9.3 4c2.3-2.2 2.8-5.7 1.2-8.4"/><path d="M13.8 10.2 20 4M18.5 2.8l2.7 2.7"/><circle cx="9.5" cy="15" r="1.6"/><path d="M6.5 18.5l4.5-4.5"/></svg></div>
+        <h3 data-i="s4h">Mandolin</h3>
+        <p data-i="s4p">Music for mandolin from someone who plays it. For soloists, quartets and mandolin orchestras.</p>
+        <ul><li data-i="s4a">Original pieces and arrangements for ensembles</li><li data-i="s4b">Scores and parts written for the instrument</li><li data-i="s4c">Recorded mandolin for your track or film</li></ul>
+      </article>
+    </div>
+    <div class="steps">
+      <div class="step"><small data-i="st1s">Step 1</small><b data-i="st1b">Brief</b><span data-i="st1p">Story, references, length, deadline.</span></div>
+      <div class="step"><small data-i="st2s">Step 2</small><b data-i="st2b">Sketch</b><span data-i="st2p">A first theme within days, so we agree on the mood.</span></div>
+      <div class="step"><small data-i="st3s">Step 3</small><b data-i="st3b">Score</b><span data-i="st3p">Full composition or orchestration with revisions.</span></div>
+      <div class="step"><small data-i="st4s">Step 4</small><b data-i="st4b">Delivery</b><span data-i="st4p">Mix, stems, scores and parts in the formats you need.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="staff"></div></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <figure class="ph"><img src="img/portrait-sepia.jpg" alt="Mike Korsun with a mandolin"></figure>
+      <div>
+        <div class="eyebrow violet" data-i="ab_eb">About</div>
+        <h2 data-ih="ab_h" style="margin-bottom:32px">From the stage <em>to the score</em></h2>
+        <div class="bio">
+          <p data-i="b1">Mike Korsun is a composer, orchestrator and mandolinist. His music lives between the concert hall and the screen: written with the instincts of a performer and the craft of an orchestrator.</p>
+          <p data-i="b2">He started music in 2001, studied folk instruments at the Ivan Karabits Music College and graduated from the Tchaikovsky National Music Academy of Ukraine in Kyiv with a Bachelor of Musical Arts. Between 2010 and 2018 he became a laureate of more than 25 international competitions and festivals.</p>
+          <p data-i="b3">For years he played as a soloist with the chamber orchestra “Lik Domer”, the Academy’s folk instruments orchestra and the orchestra of the Glier Kyiv Municipal Academy of Music. He toured Poland with the quartet “Labyrinth”, played a big Kyiv concert with “Sharovaroband” and performed on a national New Year’s Eve TV broadcast. More than 300 concerts taught him how an audience reacts in the first eight bars. That is what he writes for.</p>
+          <p data-i="b4">Since 2018 he has written music for films, games and media. Since 2020 his trailer music has been published by Amadea Music Productions, including the albums “Quantum” and “Aurora”. As the artist KORSUN he released the EP “Melodies of the Red Sea”, the singles “From the Depths” and “Flight to the Future”, and in 2026 the album “Silent Soul”, recorded entirely on mandolin.</p>
+          <p data-i="b5">Today he works with directors, game studios, producers and ensembles around the world, and teaches at his own online school, KORSUN Music School.</p>
+        </div>
+        <ol class="tl">
+          <li><time>2001</time><div><b data-i="tl1b">First steps in music</b><span data-i="tl1">Music school, folk instruments class</span></div></li>
+          <li><time>2010–2014</time><div><b data-i="tl2b">Ivan Karabits Music College</b><span data-i="tl2">Folk instruments department</span></div></li>
+          <li class="stage"><time>2010–2018</time><div><b data-i="tl3b">25+ international awards</b><span data-i="tl3">Laureate of competitions and festivals</span></div></li>
+          <li><time>2014–2019</time><div><b data-i="tl4b">Tchaikovsky National Music Academy, Kyiv</b><span data-i="tl4">Bachelor of Musical Arts</span></div></li>
+          <li class="stage"><time>2015–2019</time><div><b data-i="tl5b">Orchestra soloist</b><span data-i="tl5">“Lik Domer” chamber orchestra, Academy folk orchestra, Glier Kyiv Municipal Academy orchestra</span></div></li>
+          <li class="stage"><time>2016–2017</time><div><b data-i="tl6b">Touring</b><span data-i="tl6">Poland tour with the quartet “Labyrinth”, “Sharovaroband” concert in Kyiv</span></div></li>
+          <li class="media"><time>2018</time><div><b data-i="tl7b">Composer for media</b><span data-i="tl7">Scoring for film, games and advertising</span></div></li>
+          <li class="stage"><time>2019</time><div><b data-i="tl8b">National TV</b><span data-i="tl8">New Year’s Eve broadcast</span></div></li>
+          <li class="media"><time>2020</time><div><b>Amadea Music Productions</b><span data-i="tl9">Trailer music, album “Quantum”</span></div></li>
+          <li class="media"><time>2023</time><div><b data-i="tl10b">Film scoring</b><span data-i="tl10">Private film commissions; writing for Atom Music Audio</span></div></li>
+          <li class="artist"><time>2024</time><div><b data-i="tl11b">KORSUN project</b><span data-i="tl11">Artist project, EP “Melodies of the Red Sea”, album “Aurora” with Amadea, KORSUN Music School</span></div></li>
+          <li class="artist"><time>2026</time><div><b>“Silent Soul”</b><span data-i="tl12">Debut album, recorded entirely on mandolin</span></div></li>
+        </ol>
+        <div class="legend">
+          <span><i style="border-color:var(--acc)"></i><span data-i="lg1">Education</span></span>
+          <span><i style="border-color:var(--sea)"></i><span data-i="lg2">Stage</span></span>
+          <span><i style="border-color:var(--blue)"></i><span data-i="lg3">Media and film</span></span>
+          <span><i style="border-color:var(--violet)"></i><span data-i="lg4">Artist</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <figure class="g1"><img src="img/orchestra.jpg" alt=""><figcaption data-i="g1">Folk instruments orchestra, Kyiv</figcaption></figure>
+      <figure class="g2"><img src="img/ensemble.jpg" alt=""><figcaption data-i="g2">Ensemble on tour</figcaption></figure>
+      <figure class="g3"><img src="img/poster-labyrinth-2016.jpg" alt="" style="object-position:top"><figcaption data-i="g3">Quartet “Labyrinth”, Poland 2016</figcaption></figure>
+      <figure class="g4"><img src="img/stage-live.jpg" alt="" style="object-position:top"><figcaption data-i="g4">Live</figcaption></figure>
+      <figure class="g5"><img src="img/studio.jpg" alt="" style="object-position:top"><figcaption data-i="g5">Studio</figcaption></figure>
+      <figure class="g6"><img src="img/duo-2014.jpg" alt=""><figcaption data-i="g6">Duo concert, 2014</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:40px">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <div class="eyebrow amber" data-i="c_eb">Contact</div>
+        <h2 data-ih="c_h">Let’s make it <em>sound</em></h2>
+        <p class="intro" data-i="c_intro">Tell me about your project. A short brief is enough to start, and the first sketch follows within days.</p>
+        <p class="note" data-i="c_note">I reply within one working day.</p>
+        <div class="cta" style="margin-top:22px">
+          <a class="btn fill" id="mail" href="#contact" data-i="c_btn">Write an email</a>
+          <a class="btn line" href="https://www.instagram.com/mikekorsun" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <h3 data-i="c_list">What to put in your brief</h3>
+        <ul class="brief">
+          <li data-i="c1">The project: film, game, ensemble or track</li>
+          <li data-i="c2">Two or three reference tracks</li>
+          <li data-i="c3">Length of music and number of cues</li>
+          <li data-i="c4">Deadline and budget range</li>
+          <li data-i="c5">For ensembles: line-up and level of players</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="img/logo.png" alt="KORSUN"></a>
+    <p class="tagline" data-i="ft">Composer · Orchestrator · Mandolinist</p>
+    <nav class="links" aria-label="Links">
+      <a href="https://open.spotify.com/artist/1Rs3lG1rNcX7fJ7GzVEPyG" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://music.apple.com/album/6827305152" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://www.youtube.com/@mikekorsun" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/mikekorsun" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/MikeeKorsun/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://ffm.bio/mikekorsun" target="_blank" rel="noopener" data-i="alllinks">All links</a>
+      <a href="https://korsunmusicschool.com" target="_blank" rel="noopener">KORSUN Music School</a>
+      <a href="https://amadeamusicproductions.com/music/aurora/" target="_blank" rel="noopener">Amadea Music Productions</a>
+    </nav>
+    <small>© 2026 Mike Korsun</small>
+  </div>
+</footer>
+
+<script>
+const RU={
+ nav_work:"Работы",nav_listen:"Слушать",nav_services:"Услуги",nav_about:"Обо мне",nav_contact:"Контакты",
+ eyebrow:"Композитор · Оркестровщик · Мандолинист",
+ h1:"Музыка, которая <em>трогает</em>",
+ lede:"Эмоциональная музыка для кино, игр и трейлеров, оркестровки для любого состава и новая музыка для мандолины от музыканта, который двадцать лет живёт на сцене.",
+ cta1:"Обсудить проект",cta2:"Смотреть видео",
+ f1:"концертов как солист и в ансамблях",f2:"международных конкурсов и фестивалей, лауреат",f3:"первые заказы для кино, игр и медиа",f4:"первый трейлерный альбом на Amadea Music Productions",
+ work_eb:"Избранные работы",work_h:"Музыка, которая <em>рассказывает</em> историю",work_p:"Трейлерные и библиотечные альбомы, музыка к фильмам и играм и собственные релизы как артиста.",
+ w1t:"Альбом · 2026",w1p:"Восемь пьес, записанных целиком на мандолине, слой за слоем и в основном с первого дубля. Уже на всех площадках.",listen_go:"Слушать →",
+ w2t:"Издатель · трейлерная музыка",w2p:"Композитор трейлерной и медиа-библиотеки с 2020 года. Альбомы лицензируются для кино, ТВ и рекламы.",
+ w3t:"EP · 2024",w3h:"Мелодии Красного моря",w3p:"Сольные пьесы, построенные на лупах: один инструмент, фраза за фразой, спокойная и солнечная музыка.",listen_go2:"Слушать в Spotify →",
+ w4t:"Синглы",w4h:"Синглы KORSUN",w4p:"Отдельные пьесы, выпущенные под именем KORSUN.",allrel:"Все релизы <span>Spotify →</span>",
+ w5t:"Кино",w5h:"Музыка к фильмам",w5p:"Музыка для частных кинопроектов с 2023 года: темы, андерскор и финальное сведение под картинку.",
+ w6t:"Игры",w6h:"Музыка для игр",w6p:"Темы меню и адаптивные лупы из стемов для независимых игровых студий.",
+ w7t:"Издатели",w7h:"Трейлерная и библиотечная музыка",w7p:"Издаюсь на Amadea Music Productions, с 2023 года пишу для Atom Music Audio.",
+ listen_eb:"Слушать",listen_h:"Включите, и <em>комната</em> изменится",listen_p:"Несколько коротких пьес из портфолио. Полное портфолио оркестровок, музыки к играм и фильмам на Google Диске.",
+ t1:"Кино · документальное",t5:"Луп · мандолина",t6:"Мандолина · из альбома Silent Soul",t2:"Музыка для игры",t3:"Андерскор для кино",
+ portfolio:"Всё портфолио",alb_eb:"Новый альбом",alb_p:"О чём молчит моя душа. Дневник в восьми пьесах для мандолины.",allp:"Все площадки",
+ svc_eb:"Услуги",svc_h:"Что я <em>напишу</em> для вас",svc_p:"От первого эскиза до финальных стемов. Работаю удалённо по всему миру, на русском, английском и украинском.",
+ s1h:"Кино, ТВ и трейлеры",s1p:"Музыка, которая идёт за кадром и за героями.",s1a:"Темы и полный андерскор",s1b:"Работа по картинке, синхрон с монтажом",s1c:"Трейлерные и библиотечные треки с альтернативными версиями",s1d:"Стемы, cue sheets, готово к сведению",
+ s2h:"Игры",s2p:"Музыка, которая крутится в цикле и не надоедает, и поднимает нужный момент.",s2a:"Темы меню, исследования и боя",s2b:"Бесшовные лупы и стемы по слоям",s2c:"Стингеры и короткие кью",
+ s3h:"Оркестровка и сведение",s3p:"От фортепианного эскиза или MIDI до партитуры, которую можно открыть и сыграть.",s3a:"Струнные, камерный, народный и симфонический оркестр",s3b:"Партитура и партии, набранные в нотах",s3c:"Реалистичные демо для согласования",s3d:"Сведение оркестровой музыки",
+ sig:"Фишка",s4h:"Мандолина",s4p:"Музыка для мандолины от того, кто на ней играет. Для солистов, квартетов и мандолинных оркестров.",s4a:"Оригинальные пьесы и переложения для ансамблей",s4b:"Партитуры и партии, удобные для инструмента",s4c:"Запись мандолины для вашего трека или фильма",
+ st1s:"Шаг 1",st1b:"Бриф",st1p:"История, референсы, хронометраж, сроки.",st2s:"Шаг 2",st2b:"Эскиз",st2p:"Первая тема за несколько дней, чтобы совпасть по настроению.",st3s:"Шаг 3",st3b:"Партитура",st3p:"Полная композиция или оркестровка с правками.",st4s:"Шаг 4",st4b:"Сдача",st4p:"Сведение, стемы, партитуры и партии в нужных форматах.",
+ ab_eb:"Обо мне",ab_h:"Со сцены <em>в партитуру</em>",
+ b1:"Михаил Корсун — композитор, оркестровщик и мандолинист. Его музыка живёт между концертным залом и экраном: она написана с чутьём исполнителя и ремеслом оркестровщика.",
+ b2:"Он начал заниматься музыкой в 2001 году, учился на отделении народных инструментов в музыкальном училище имени Ивана Карабица и окончил Национальную музыкальную академию Украины имени П. И. Чайковского в Киеве со степенью бакалавра музыкального искусства. С 2010 по 2018 год стал лауреатом более 25 международных конкурсов и фестивалей.",
+ b3:"Много лет он был солистом камерного оркестра «Лик Домер», оркестра народных инструментов академии и оркестра Киевской муниципальной академии музыки имени Глиэра. Гастролировал по Польше с квартетом «Лабиринт», играл большой концерт в Киеве с «Sharovaroband» и выступал в новогоднем эфире центрального телевидения. Более 300 концертов научили его тому, как зал реагирует в первые восемь тактов. Именно для этого он и пишет.",
+ b4:"С 2018 года он пишет музыку для кино, игр и медиа. С 2020 года его трейлерную музыку издаёт Amadea Music Productions, в том числе альбомы «Quantum» и «Aurora». Как артист KORSUN он выпустил EP «Мелодии Красного моря», синглы «From the Depths» и «Flight to the Future», а в 2026 году альбом «Silent Soul», записанный целиком на мандолине.",
+ b5:"Сегодня он работает с режиссёрами, игровыми студиями, продюсерами и ансамблями по всему миру и преподаёт в своей онлайн-школе KORSUN Music School.",
+ tl1b:"Первые шаги в музыке",tl1:"Музыкальная школа, класс народных инструментов",tl2b:"Музыкальное училище им. Ивана Карабица",tl2:"Отделение народных инструментов",tl3b:"25+ международных наград",tl3:"Лауреат конкурсов и фестивалей",tl4b:"НМАУ им. П. И. Чайковского, Киев",tl4:"Бакалавр музыкального искусства",tl5b:"Солист оркестров",tl5:"Камерный оркестр «Лик Домер», оркестр народных инструментов академии, оркестр академии им. Глиэра",tl6b:"Гастроли",tl6:"Тур по Польше с квартетом «Лабиринт», концерт «Sharovaroband» в Киеве",tl7b:"Композитор для медиа",tl7:"Музыка для кино, игр и рекламы",tl8b:"Центральное ТВ",tl8:"Новогодний эфир",tl9:"Трейлерная музыка, альбом «Quantum»",tl10b:"Музыка к фильмам",tl10:"Частные заказы для кино; пишу для Atom Music Audio",tl11b:"Проект KORSUN",tl11:"Артист-проект, EP «Мелодии Красного моря», альбом «Aurora» на Amadea, KORSUN Music School",tl12:"Дебютный альбом, записанный целиком на мандолине",
+ lg1:"Учёба",lg2:"Сцена",lg3:"Медиа и кино",lg4:"Артист",
+ g1:"Оркестр народных инструментов, Киев",g2:"Ансамбль на гастролях",g3:"Квартет «Лабиринт», Польша 2016",g4:"Концерт",g5:"Студия",g6:"Концерт дуэта, 2014",
+ c_eb:"Контакты",c_h:"Пусть ваш проект <em>зазвучит</em>",c_intro:"Расскажите о проекте. Для начала достаточно короткого брифа, первый эскиз будет в течение нескольких дней.",c_note:"Отвечаю в течение одного рабочего дня.",c_btn:"Написать письмо",
+ c_list:"Что указать в брифе",c1:"Проект: фильм, игра, ансамбль или трек",c2:"Два-три референса",c3:"Хронометраж и количество кью",c4:"Сроки и бюджет",c5:"Для ансамблей: состав и уровень музыкантов",
+ ft:"Композитор · Оркестровщик · Мандолинист",alllinks:"Все ссылки"
+};
+const HTMLKEYS=new Set(['allrel']);
+const EN={};
+document.querySelectorAll('[data-i],[data-ih]').forEach(el=>{const k=el.dataset.i||el.dataset.ih;EN[k]=(el.dataset.ih||HTMLKEYS.has(k))?el.innerHTML:el.textContent});
+function setLang(l){
+  const D=l==='ru'?RU:EN;
+  document.querySelectorAll('[data-i]').forEach(el=>{const v=D[el.dataset.i];if(v==null)return;HTMLKEYS.has(el.dataset.i)?el.innerHTML=v:el.textContent=v});
+  document.querySelectorAll('[data-ih]').forEach(el=>{const v=D[el.dataset.ih];if(v!=null)el.innerHTML=v});
+  document.documentElement.lang=l;
+  document.getElementById('l-en').setAttribute('aria-pressed',l==='en');
+  document.getElementById('l-ru').setAttribute('aria-pressed',l==='ru');
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+document.getElementById('l-en').onclick=()=>{setLang('en');history.replaceState(null,'',location.pathname+'#en')};
+document.getElementById('l-ru').onclick=()=>{setLang('ru');history.replaceState(null,'',location.pathname+'#ru')};
+let start='en';
+if(location.hash==='#ru')start='ru';else if(location.hash!=='#en'){try{if(localStorage.getItem('lang')==='ru')start='ru'}catch(e){}}
+setLang(start);
+
+(function(){const u=['mikekorsun','composer'].join('.'),d=['gmail','com'].join('.');const m=document.getElementById('mail');
+const go=()=>{m.href='mail'+'to:'+u+'@'+d+'?subject='+encodeURIComponent('Project enquiry')};m.addEventListener('mouseenter',go);m.addEventListener('focus',go);m.addEventListener('touchstart',go,{passive:true});m.addEventListener('click',go)})();
+
+const PLAY='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>',PAUSE='<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>';
+const audio=new Audio();audio.preload='none';let cur=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function reset(tr){tr.classList.remove('on');tr.querySelector('.play').innerHTML=PLAY;tr.querySelector('.bar i').style.width='0';tr.querySelector('time').textContent=tr.dataset.dur}
+document.querySelectorAll('.trk').forEach(tr=>{
+  const b=tr.querySelector('.play');b.innerHTML=PLAY;
+  tr.dataset.dur=tr.querySelector('time').textContent;
+  b.onclick=()=>{
+    if(cur===tr){audio.paused?audio.play():audio.pause();return}
+    if(cur)reset(cur);
+    cur=tr;audio.src=tr.dataset.src;audio.play().catch(()=>{});
+  };
+  tr.querySelector('.bar').onclick=e=>{if(cur!==tr||!audio.duration)return;const r=e.currentTarget.getBoundingClientRect();audio.currentTime=(e.clientX-r.left)/r.width*audio.duration};
+});
+audio.onplay=()=>{if(cur){cur.classList.add('on');cur.querySelector('.play').innerHTML=PAUSE}};
+audio.onpause=()=>{if(cur)cur.querySelector('.play').innerHTML=PLAY};
+audio.ontimeupdate=()=>{if(!cur||!audio.duration)return;cur.querySelector('.bar i').style.width=(audio.currentTime/audio.duration*100)+'%';cur.querySelector('time').textContent=fmt(audio.currentTime)};
+audio.onended=()=>{if(cur)reset(cur)};
+</script>
+
+</body>
+</html>
